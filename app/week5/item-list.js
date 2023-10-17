@@ -5,9 +5,12 @@ import Items from "./item";
 import itemsData from "./items.json";
 
 export default function ItemList() {
+
+    //States for sorting and using items
   const [sortBy, setSortBy] = useState("name");
   const [items, setItems] = useState(itemsData);
 
+    //Function to handle sorting change preferences
   const handleSortByChange = (newSortPreference) => {
     setSortBy(newSortPreference);
 
@@ -16,6 +19,7 @@ export default function ItemList() {
   return (
     <div>
       <div>
+        {/* Display the sorting options */}
         <h3 className='inline'>
           Sort By:
         </h3>
@@ -34,6 +38,7 @@ export default function ItemList() {
       </div>
 
         <ul>
+            {/* Displaying the item's from items using map and rendering*/}
             {items
                 .sort((a, b) => {
                 if (sortBy === "name") {
