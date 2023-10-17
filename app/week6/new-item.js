@@ -5,8 +5,7 @@ import React, { useState } from 'react';
 export default function NewItem({ onAddItem }) {
   const [name, setName] = useState("");
   const [quantity, setQuantity] = useState("");
-  const [category, setCategory] = useState("produce"); // Set default value
-
+  const [category, setCategory] = useState("produce");
   const handleSubmit = (event) => {
     event.preventDefault();
 
