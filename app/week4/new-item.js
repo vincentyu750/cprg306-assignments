@@ -63,14 +63,14 @@ export default function NewItem()
                             class="w-full mt-1 border-2 border-gray-300 p-2 rounded-lg font-sans">
                         </input>
                     </div>
-                <div class="flex justify-between">
+                <div class="flex justify-between w-full">
                     <input 
                         type="number" 
                         min="1" 
                         max="99" 
                         required
                         onChange={handleQuantityChange} 
-                        class="w-20 ml-1 border-2 border-gray-300 p-2 rounded-lg font-sans" 
+                        class="w-20 border-2 border-gray-300 p-2 rounded-lg font-sans" 
                         >
                     </input>
                     <select 

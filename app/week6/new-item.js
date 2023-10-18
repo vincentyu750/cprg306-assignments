@@ -60,7 +60,7 @@ export default function NewItem({ onAddItem }) {
             required
             value={quantity}
             onChange={handleQuantityChange}
-            className="w-20 ml-1 border-2 border-gray-300 p-2 rounded-lg font-sans"
+            className="w-20 border-2 border-gray-300 p-2 rounded-lg font-sans"
           />
           <select
             value={category}
