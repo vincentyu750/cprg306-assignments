@@ -1,56 +1,63 @@
 "use client";
+import React, { useState } from 'react';
 
-import { useState } from "react";
-import Items from "./item";
+import Item from "./item";
 
-
-export default function ItemList({ items }) {
+export default function ItemList({ items, onItemSelect }) {
   const [sortBy, setSortBy] = useState("name");
 
-  const handleSortByChange = (newSortPreference) => {
-    setSortBy(newSortPreference);
+  let sortedItems = [];
+
+  function sortByName() {
+    return items.slice().sort((a, b) => a.name.localeCompare(b.name));
+  }
+
+  function sortByCategory() {
+    return items.slice().sort((a, b) => a.category.localeCompare(b.category));
+  }
+
+  const handleSortBy = (newSortBy) => {
+    setSortBy(newSortBy);
+  };
+
+  if (sortBy === "name") {
+    sortedItems = sortByName();
+  } else if (sortBy === "category") {
+    sortedItems = sortByCategory();
   }
 
   return (
     <div>
-      <div>
-        <h3 className='inline'>
+      <h3 className='inline'>
           Sort By:
-        </h3>
-        <button className="p-1 m-2 w-28"
-          onClick={() => handleSortByChange("name")}
-          style={{ backgroundColor: sortBy === "name" ? "orange" : "red" }}
-        >
-          Name
-        </button>
-        <button className="p-1 m-2 w-28"
-          onClick={() => handleSortByChange("category")}
+      </h3>
+      <div>
+        <button
+          onClick={() => handleSortBy("name")}
+          className={`bg-${sortBy === "name" ? "teal-300" : "teal-100"} m-4 p-2 rounded-lg`}
           style={{ backgroundColor: sortBy === "category" ? "orange" : "red" }}
         >
-          Category
+          Sort by name
+        </button>
+
+        <button
+          onClick={() => handleSortBy("category")}
+          className={`bg-${sortBy === "category" ? "teal-300" : "teal-100"} m-4 p-2 rounded-lg`}
+          style={{ backgroundColor: sortBy === "name" ? "orange" : "red" }}
+        >
+          Sort by category
         </button>
       </div>
 
-      <ul>
-        {items
-          .slice() // Create a copy of the items prop
-          .sort((a, b) => {
-            if (sortBy === "name") {
-              return a.name.localeCompare(b.name);
-            } else if (sortBy === "category") {
-              return a.category.localeCompare(b.category);
-            }
-          })
-          .map(item => (
-            <Items
-              key={item.id}
-              name={item.name}
-              quantity={item.quantity}
-              category={item.category}
-            />
-          ))
-        }
-      </ul>
+      {sortedItems.map((item) => (
+        <Item
+          key={item.id}
+          name={item.name}
+          quantity={item.quantity}
+          category={item.category}
+          onSelect={() => onItemSelect(item.name)}
+        />
+      ))}
     </div>
   );
 }
