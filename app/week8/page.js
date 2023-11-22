@@ -38,7 +38,7 @@ export default function Page() {
           <div>
             <p>Welcome, {user.email}</p>
             {isSignedIn && ( 
-              <Link href="/week8/shopping-list/page">
+              <Link href="/week8/shopping-list">
                 <button>Go to Shopping List</button>
               </Link>
             )}
